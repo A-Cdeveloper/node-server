@@ -1,0 +1,16 @@
+GET http://localhost:8080/areas
+
+###
+
+POST http://localhost:8080/workers/add_worker
+Content-Type: application/json
+
+{
+    "qrid": "WN0001", 
+    "parcela_id": 3, 
+    "operacija_id": 2
+}
+
+
+### 
+GET http://localhost:8080/operations
