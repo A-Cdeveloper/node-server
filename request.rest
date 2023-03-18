@@ -13,4 +13,7 @@ Content-Type: application/json
 
 
 ### 
-GET http://localhost:8080/operations
+GET http://localhost:8080/records
+
+###
+GET http://localhost:8080/records/2023-03-01/2023-03-18

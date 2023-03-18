@@ -28,10 +28,10 @@ router.post("/add_worker", async (req, res) => {
   const alreadyCheck = await dbfunctions.getRecordsByDate(currentDate);
   const finded = alreadyCheck.find((el) => el.qrid == worker.qrid);
   if (finded) {
-    return res.status(500).json({ message: "Radnik je vec evidentiran danas." });
+    return res.status(500).json({ message: `Zaposleni ${worker.first_name} ${worker.last_name} je vec evidentiran danas.` });
   }
   await dbfunctions.addWorkerToRecords(qrid, parcela_id, operacija_id);
-  res.status(200).json({ message: "Radnik je evidentiran." });
+  res.status(200).json({ message: `Zaposleni ${worker.first_name} ${worker.last_name} je evidentiran.` });
 });
 
 module.exports = router;

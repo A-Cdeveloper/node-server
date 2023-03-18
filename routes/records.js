@@ -18,4 +18,17 @@ router.get("/:date", async (req, res, next) => {
   res.send(evidencijaByDay);
 });
 
+router.get("/:dateFrom/:dateTo", async (req, res, next) => {
+  const dateFrom = req.params.dateFrom;
+  const dateTo = req.params.dateTo;
+  const evidencijaPeriod = await dbfunctions.getRecordsByPeriod(
+    dateFrom,
+    dateTo
+  );
+  if (evidencijaPeriod.length == 0) {
+    return res.json({ message: "Nema upisa za izabrani period." });
+  }
+  res.send(evidencijaPeriod);
+});
+
 module.exports = router;
