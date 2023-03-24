@@ -8,6 +8,7 @@ const pool = mysql
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
+    timezone: "+02:00",
   })
   .promise();
 
@@ -34,7 +35,7 @@ const getRecords = async () => {
 
 const getRecordsByDate = async (date) => {
   const [evidencija] = await pool.query(
-    "SELECT eid,evidencija.qrid,first_name,last_name,operacija_id,naziv_operacije,parcela_id,naziv_parcele,created FROM evidencija,zaposleni,parcele, operacije WHERE evidencija.qrid=zaposleni.qrid AND evidencija.created LIKE CONCAT(?,  '%') AND evidencija.parcela_id = parcele.pid AND evidencija.operacija_id = operacije.oid",
+    "SELECT eid,evidencija.qrid,first_name,last_name,operacija_id,naziv_operacije,parcela_id,naziv_parcele,created FROM evidencija,zaposleni,parcele, operacije WHERE evidencija.qrid=zaposleni.qrid AND DATE(evidencija.created) = ? AND evidencija.parcela_id = parcele.pid AND evidencija.operacija_id = operacije.oid",
     [date]
   );
   return evidencija;
