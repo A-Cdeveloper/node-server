@@ -43,7 +43,7 @@ const getRecordsByDate = async (date) => {
 
 const getRecordsByPeriod = async (dateFrom, dateTo) => {
   const [evidencija] = await pool.query(
-    "SELECT operacija_id,naziv_operacije,parcela_id,naziv_parcele,created FROM evidencija,zaposleni,parcele, operacije WHERE evidencija.qrid=zaposleni.qrid AND DATE(evidencija.created) >= ? AND DATE(evidencija.created) <= ? AND evidencija.parcela_id = parcele.pid AND evidencija.operacija_id = operacije.oid ORDER BY evidencija.created",
+    "SELECT operacija_id,naziv_operacije,parcela_id,naziv_parcele,created, status FROM evidencija,zaposleni,parcele, operacije WHERE evidencija.qrid=zaposleni.qrid AND DATE(evidencija.created) >= ? AND DATE(evidencija.created) <= ? AND evidencija.parcela_id = parcele.pid AND evidencija.operacija_id = operacije.oid ORDER BY evidencija.created",
     [dateFrom, dateTo]
   );
   return evidencija;
